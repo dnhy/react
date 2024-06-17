@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+
+  <script type="text/babel">
+    const data = ["theme1", "theme2", "theme3"];
+    //只能写表达式（有返回值，如函数、变量。。。），不能写语句（如if、for）;因为jsx是取的表达式的返回值进行渲染
+    const VDOM = (
+      <div>
+        {console.log(1212)}
+        <h1 className={name} onClick={method}>测试</h1>
+        <ul>
+          {data.map((item, index) => {
+            return <li key={index}>{item}</li>;
+          })}
+        </ul>
+      </div>
+    );
+    var name = "test";
+    function method(){
+      alert(1213)
+    }
+    ReactDOM.render(VDOM, document.getElementById("app"));
+  </script>
+
+  <style>
+    .test {
+      color: aquamarine;
+    }
+  </style>
+</html>

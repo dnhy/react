@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      //初始化状态
+      state = { isHot: true, wind: "微风" };
+
+      render() {
+        let { isHot, wind } = this.state;
+
+        return (
+          <h1 onClick={this.changeWeather}>
+            今天天气很{isHot ? "炎热" : "凉爽"}，且{wind}
+          </h1>
+        );
+      }
+
+      changeWeather = () => {
+        let { isHot } = this.state;
+        this.setState({ isHot: !isHot }); //对象进行合并相当于assign，
+      };
+    }
+
+    ReactDOM.render(<Weather />, document.getElementById("app"));
+
+    var a = [1, 2, 3, 4];
+    var res = a.reduce((preVal, curVal) => {
+        console.log('[ preVal ] >', preVal)
+        console.log('[ curVal ] >', curVal)
+      return preVal + curVal;
+    });
+    console.log('[ res ] >', res)
+    // proto
+    // property => prop
+    // properties =>props
+
+    // prototype
+    // propType
+    // propTypes
+  </script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    class Login extends React.Component {
+      handleSubmit = (event) => {
+        //阻止表单提交
+        event.preventDefault();
+        
+        //输入类dom现用现取
+        console.log(this.username.value);
+      };
+
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            用户名:
+            <input
+              ref={(node) => (this.username = node)}
+              type="text"
+              name="username"
+            />
+            密码:
+            <input
+              ref={(node) => (this.password = node)}
+              type="password"
+              name="password"
+            />
+            <button>登录</button>
+          </form>
+        );
+      }
+    }
+
+    ReactDOM.render(<Login />, document.getElementById("app"));
+  </script>
+</html>

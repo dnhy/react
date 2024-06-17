@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Weather extends React.Component {
+      //类里面只能写属性或方法
+      //调1次
+      constructor(props, isHot) {
+        super(props);
+        //默认值为null,必须是对象
+        this.state = { isHot: true, wind: "微风" };
+        //这样写方法会放到实例中，优先调用
+        this.changeWeather = this.changeWeather.bind(this);
+      }
+      //调1+n次，每次修改状态调一次render
+      render() {
+        let { isHot, wind } = this.state;
+
+        return (
+          // 通过实例对象找到changeWeather作为onClick的回调，点击时调用回调函数，调用者为window
+          <h1 onClick={this.changeWeather}>
+            今天天气很{isHot ? "炎热" : "凉爽"}，且{wind}
+          </h1>
+        );
+      }
+
+      //方法放到了原型对象中
+      changeWeather() {
+        let { isHot } = this.state;
+        console.log(isHot);
+        // this.state.isHot = !isHot;//这样不是响应式的
+        this.setState({ isHot: !isHot }); //对象进行合并相当于assign，
+      }
+    }
+
+    ReactDOM.render(<Weather />, document.getElementById("app"));
+  </script>
+</html>

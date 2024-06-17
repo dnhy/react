@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="test"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    function Demo() {
+      return <div>函数式组件</div>;
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById("app"));
+
+    class MyComp extends React.Component {
+      //react new了Mycomp的实例，调用了renderß
+      render() {
+        console.log("[ this ] >", this);
+        return <div>类式组件</div>;
+      }
+    }
+
+    ReactDOM.render(<MyComp />, document.getElementById("test"));
+  </script>
+</html>

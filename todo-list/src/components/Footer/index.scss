@@ -1,0 +1,13 @@
+.footer {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+  .statistic {
+    margin-left: 10px;
+  }
+  .operate {
+    display: flex;
+  }
+}

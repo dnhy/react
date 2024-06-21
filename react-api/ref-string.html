@@ -17,6 +17,7 @@
     class Demo extends React.Component {
       showData = () => {
         console.log(this);
+        // 拿到的是真实dom，过时的API
         console.log(this.refs.input1);
         const { input1 } = this.refs;
         alert(input1.value);

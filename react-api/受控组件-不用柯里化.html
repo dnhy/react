@@ -30,18 +30,30 @@
         this.setState({ username: event.target.value });
       };
       savePassword = (event) => {
-        this.setState({ password: event.target.value } );
+        this.setState({ password: event.target.value });
+      };
+
+      saveFormData = (evnet, dataType) => {
+        this.setState({ [dataType]: event.target.value });
       };
       render() {
         return (
           <form onSubmit={this.handleSubmit}>
             用户名:
-            <input type="text" name="username" onChange={this.saveUsername} />
+            <input
+              type="text"
+              name="username"
+              onChange={(event) => {
+                this.saveFormData(event, "username");
+              }}
+            />
             密码:
             <input
               type="password"
               name="password"
-              onChange={this.savePassword}
+              onChange={(event) => {
+                this.saveFormData(event, "password");
+              }}
             />
             <button>登录</button>
           </form>

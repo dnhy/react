@@ -15,6 +15,13 @@
 
   <script type="text/babel">
     class Person extends React.Component {
+      // constructor(props) {
+      //   若使用了构造函数，需要把props回传给react，react会放到实例对象，不然可能this取不到props（不同版本可能不同）
+      //   super(props);
+      //   console.log(props);
+      //   console.log(this);
+      //   console.log(this.props);
+      // }
       render() {
         let { name, age, gender } = this.props;
         return (
@@ -25,27 +32,20 @@
           </ul>
         );
       }
+
+      //给类添加属性
+      static propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number,
+        gender: PropTypes.string,
+        speak: PropTypes.func,
+      };
+
+      static defaultProps = {
+        gender: "男",
+      };
     }
 
-    // ReactDOM.render(
-    //   <Person name="测试" age="18" gender="女" />,
-    //   document.getElementById("app")
-    // );
-    const p = {
-      name: "测试",
-      age: "18",
-      gender: "女",
-    };
-
-    Person.propTypes = {
-      name: PropTypes.string.isRequired,
-      gender: PropTypes.string,
-      speak: PropTypes.func,
-    };
-
-    Person.defaultProps = {
-      gender: "男",
-    };
     ReactDOM.render(
       <Person name="测试" age={18} speak={speak} />,
       document.getElementById("app")
@@ -54,6 +54,12 @@
     function speak() {
       console.log("speak");
     }
+
+    const p = {
+      name: "测试",
+      age: "18",
+      gender: "女",
+    };
 
     // ReactDOM.render(<Person {...p} />, document.getElementById("app"));
   </script>

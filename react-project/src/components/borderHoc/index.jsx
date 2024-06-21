@@ -4,7 +4,7 @@ const BordeHoc = (WrappedComponent) =>
   class extends Component {
     render() {
       return (
-        <div>
+        <div style={{ border: "solid 1px red" }}>
           <WrappedComponent />
         </div>
       );

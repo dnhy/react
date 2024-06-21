@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    class A extends React.Component {
+      state = {
+        attr: 123,
+      };
+      changeA = () => {
+        this.setState({ attr: 456 });
+      };
+      render() {
+        console.log("render");
+        return (
+          <div>
+            <div>this is A</div>
+            <button onClick={this.changeA}>更新A</button>
+            <B attr={this.state.attr} />
+          </div>
+        );
+      }
+    }
+
+    class B extends React.Component {
+      componentWillReceiveProps() {
+        console.log("componentWillRecieveProps");
+      }
+      render() {
+        return (
+          <div>
+            <div>{this.props.attr}</div>
+            <div>this is B</div>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(<A />, document.getElementById("app"));
+  </script>
+</html>

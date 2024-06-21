@@ -11,16 +11,11 @@
   <script type="text/javascript" src="./js/react.development.js"></script>
   <script type="text/javascript" src="./js/react-dom.development.js"></script>
   <script type="text/javascript" src="./js/babel.min.js"></script>
+  <!-- 引入PropTypes用于对组件标签属性进行限制 -->
   <script type="text/javascript" src="./js/prop-types.js"></script>
 
   <script type="text/babel">
     class Person extends React.Component {
-      constructor(props) {
-        //把props回传给react，react会放到实例对象
-        super(props);
-        console.log(this);
-        console.log(this.props);
-      }
       render() {
         let { name, age, gender } = this.props;
         return (
@@ -31,19 +26,28 @@
           </ul>
         );
       }
-
-      static propTypes = {
-        name: PropTypes.string.isRequired,
-        age: PropTypes.number,
-        gender: PropTypes.string,
-        speak: PropTypes.func,
-      };
-
-      static defaultProps = {
-        gender: "男",
-      };
     }
 
+    // ReactDOM.render(
+    //   <Person name="测试" age="18" gender="女" />,
+    //   document.getElementById("app")
+    // );
+    const p = {
+      name: "测试",
+      age: "18",
+      gender: "女",
+    };
+
+    //使用propTypes属性限制组件props类型
+    Person.propTypes = {
+      name: PropTypes.string.isRequired,
+      gender: PropTypes.string,
+      speak: PropTypes.func,
+    };
+
+    Person.defaultProps = {
+      gender: "男",
+    };
     ReactDOM.render(
       <Person name="测试" age={18} speak={speak} />,
       document.getElementById("app")
@@ -53,12 +57,7 @@
       console.log("speak");
     }
 
-    const p = {
-      name: "测试",
-      age: "18",
-      gender: "女",
-    };
-
+    // 这里的{}是表示写的js语句，...p就是可以展开一个对象，原生js不允许展开运算符直接展开一个对象，但react和babel中会使其允许这样做，但仅可在标签中使用
     // ReactDOM.render(<Person {...p} />, document.getElementById("app"));
   </script>
 

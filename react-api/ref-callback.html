@@ -36,7 +36,12 @@
               placeholder="点击按钮提示数据"
             />
             <button onClick={this.showData}>确认</button>
-            {/* <input
+            {
+              //内联函数形式
+            }
+            {/* 
+              传一个回调函数，react调用时会传入节点，我们自己进行接收
+              <input
               onBlur={this.showData2}
               ref={(dom) => {
                 this.input2 = dom;
@@ -44,6 +49,9 @@
               type="text"
               placeholder="失去焦点提示数据"
             /> */}
+            {
+              //class的绑定函数形式：解决render刷新dom时为了清空传入null的问题
+            }
             <input
               onBlur={this.showData2}
               ref={this.saveInput}

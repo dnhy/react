@@ -1,40 +1,108 @@
 import React, { Component } from "react";
-import axios from "axios";
+import Header from "./components/Header";
+import List from "./components/List";
+import Footer from "./components/Footer";
+import BordeHoc from "./components/borderHoc";
+import "./App.css";
 
+@BordeHoc
 export default class App extends Component {
-  getStudentData() {
-    axios.get("http://localhost:3000/api1/students").then(
-      (response) => {
-        console.log("[ 成功 ] >", response.data);
-      },
-      (error) => {
-        console.log("[ 失败 ] >", error);
-      }
-    );
-  }
-  getStudentData2() {
-    axios.get("http://localhost:3000/api2/cars").then(
-      (response) => {
-        console.log("[ 成功 ] >", response.data);
-      },
-      (error) => {
-        console.log("[ 失败 ] >", error);
-      }
-    );
-  }
-  render() {
-    var a = 11111;
-    //后面跟表达式
-    var b = true ? ((a = "qqq"), "nb") : "121212";
-    console.log("[ b ] >", b);
+  state = {
+    todos: [
+      { id: "001", name: "event1", done: true },
+      { id: "002", name: "event2", done: true },
+      { id: "003", name: "event3", done: false },
+      { id: "004", name: "event4", done: false },
+    ],
+  };
 
-    var c = (12112212,122);
-    console.log('[ c ] >', c)
-    return (a += 121211122);
+  //用于接收从子组件传递的todo
+  addTodo = (data) => {
+    console.log(data);
+    const { todos } = this.state;
+    const newTodos = [data, ...todos];
+    this.setState({ todos: newTodos });
+  };
+
+  updataTodo = (id, done) => {
+    const { todos } = this.state;
+    var target = todos.find((todoOj) => {
+      return todoOj.id === id;
+    });
+
+    if (target != undefined) {
+      target.done = done;
+    }
+
+    console.log("[ this.state1 ] >", this.state);
+    //将新值传入todos属性，react会把新值与他自己保存的旧址进行比较合并(assign)
+    this.setState({ todos: todos });
+    console.log("[ this.state2 ] >", this.state);
+  };
+
+  //删除
+  deleteTodo = (id) => {
+    if (!window.confirm("确定删除吗")) {
+      return;
+    }
+
+    const { todos } = this.state;
+    // var targetIndex = todos.findIndex((todoOj) => {
+    //   return todoOj.id === id;
+    // });
+    // console.log('targetIndex :', targetIndex);
+
+    // todos.splice(targetIndex, 1);
+    // this.setState({ todos });
+
+    const newTodos = todos.filter((todoOj) => {
+      return todoOj.id != id;
+    });
+
+    this.setState({ todos: newTodos });
+  };
+
+  //全选
+  checkAllTodo = (done) => {
+    const { todos } = this.state;
+    const newTodos = todos.map((item) => {
+      return {
+        ...item,
+        done,
+      };
+    });
+
+    this.setState({ todos: newTodos });
+  };
+
+  //删除所有已完成的
+  deleteAlldone = () => {
+    const { todos } = this.state;
+    const newTodos = todos.filter((item) => {
+      return !item.done;
+    });
+
+    this.setState({ todos: newTodos });
+  };
+
+  render() {
+    const { todos } = this.state;
+
     return (
-      <div>
-        <button onClick={this.getStudentData}>点击</button>
-        <button onClick={this.getStudentData2}>点击2</button>
+      <div className="todo-container">
+        <div className="todo-wrap">
+          <Header addTodo={this.addTodo} />
+          <List
+            todos={todos}
+            updataTodo={this.updataTodo}
+            deleteTodo={this.deleteTodo}
+          />
+          <Footer
+            todos={todos}
+            checkAllTodo={this.checkAllTodo}
+            deleteAlldone={this.deleteAlldone}
+          />
+        </div>
       </div>
     );
   }

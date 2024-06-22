@@ -86,22 +86,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.24.7"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-react",
-      [
-        "@babel/preset-env"
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ]
-    ]
-  },
+
   "jest": {
     "roots": [
       "<rootDir>/src"

@@ -4,5 +4,4 @@
 export default Object.freeze({
   INCREMENT: "increment",
   DECREMENT: "decrement",
-  ADD_PERSON: "addPerson",
 });

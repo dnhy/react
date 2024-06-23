@@ -17,6 +17,8 @@ class User extends Component {
   render() {
     return (
       <div>
+        <h3>上面组件的求和结果是：{this.props.sum}</h3>
+
         <input
           type="text"
           placeholder="姓名"
@@ -36,7 +38,6 @@ class User extends Component {
             return <li key={item.id}>{item.name}</li>;
           })}
         </ul>
-        <h3>上面组件的求和结果是：{this.props.sum}</h3>
         <button onClick={this.addPerson}>添加人员</button>
       </div>
     );
